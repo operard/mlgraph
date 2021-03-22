@@ -13,15 +13,24 @@ This workshop walks you through the steps to build a Bank Fraud Detection engine
 
 ## Workshop Details
 
-### Step 1
+### Step 1: Convert from Relational Data Model to Property Graph Data Model.
 
 
-### Step 2
 
-### Step 3
+### Step 2: Use Open Source Apache Zeppelin with PGX Interpreter and Groovy.
 
-### Step 4
 
-### Step 5
+### Step 3: Use Python to access to Oracle Graph “PyPGX”.
+
+
+### Step 4: Apply Queries to detect Ring Patterns in the Graph Data Model
+
+
+### Step 5: Connect Third-Party Library Vis.JS from Python.
+
+
+### Step 6: Use PGX Visualizer.
+
+
 
 
