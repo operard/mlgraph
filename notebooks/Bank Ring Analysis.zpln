@@ -1,0 +1,1217 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md\n\n# Ring Fraud Algorithm using PGX\n\n## First Step: Get a session in PGX server.",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:56:15+0100",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>Ring Fraud Algorithm using PGX</h1>\n<h2>First Step: Get a session in PGX server.</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613565984349_686707582",
+      "id": "20200401-164047_813775130",
+      "dateCreated": "2021-02-17T13:46:24+0100",
+      "dateStarted": "2021-03-22T11:56:15+0100",
+      "dateFinished": "2021-03-22T11:56:15+0100",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:14397"
+    },
+    {
+      "text": "%pgx\nimport oracle.pgx.api.*\nimport groovy.json.*\n \nbaseUrl = 'https://localhost:7007'\nusername = 'bankuser'\npassword = 'welcome1'\n \nconn = new URL(\"$baseUrl/auth/token\").openConnection()\nconn.setRequestProperty('Content-Type', 'application/json')\ntoken = conn.with {\n  doOutput = true\n  requestMethod = 'POST'\n  outputStream.withWriter { writer ->\n    writer << JsonOutput.toJson([username: username, password: password])\n  }\n  return new JsonSlurper().parseText(content.text).access_token\n}\n \ninstance = Pgx.getInstance(baseUrl, token)\nsession = instance.createSession(\"zephr-session\")",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:56:15+0100",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "PgxSession[ID=a4877fd4-2462-4d04-a72e-682291db62b1,source=zephr-session]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613565984349_1011234670",
+      "id": "paragraph_1606392778478_1360436759",
+      "dateCreated": "2021-02-17T13:46:24+0100",
+      "dateStarted": "2021-03-22T11:56:15+0100",
+      "dateFinished": "2021-03-22T11:56:22+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14398",
+      "title": "Connect to PGX"
+    },
+    {
+      "title": "Database credentials",
+      "text": "%pgx\n\njdbcUrl = \"jdbc:oracle:thin:@localhost:1521/orclpdb\" \nuser = \"bankuser\"\npass = \"welcome1\"\n",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:56:22+0100",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "welcome1"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613565984350_1968624123",
+      "id": "20200324-165731_1791260188",
+      "dateCreated": "2021-02-17T13:46:24+0100",
+      "dateStarted": "2021-03-22T11:56:22+0100",
+      "dateFinished": "2021-03-22T11:56:22+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14399"
+    },
+    {
+      "title": "Create a property graph builder from rdbms",
+      "text": "%pgx\nimport oracle.pgx.config.*\nbuilder=GraphConfigBuilder.forPropertyGraphRdbms();",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:56:22+0100",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "oracle.pgx.config.PgRdbmsGraphConfigBuilder@3991c5fa"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613565984350_463204467",
+      "id": "20200324-165834_1556823713",
+      "dateCreated": "2021-02-17T13:46:24+0100",
+      "dateStarted": "2021-03-22T11:56:22+0100",
+      "dateFinished": "2021-03-22T11:56:22+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14400"
+    },
+    {
+      "text": "%pgx\n\nbuilder.setJdbcUrl(jdbcUrl);",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:56:22+0100",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "oracle.pgx.config.PgRdbmsGraphConfigBuilder@3991c5fa"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613565984350_841416473",
+      "id": "20200324-170142_1864504379",
+      "dateCreated": "2021-02-17T13:46:24+0100",
+      "dateStarted": "2021-03-22T11:56:22+0100",
+      "dateFinished": "2021-03-22T11:56:22+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14401"
+    },
+    {
+      "text": "%pgx\n\nimport oracle.pgx.common.types.*\n\nbuilder.setUsername(user);\nbuilder.setPassword(pass);\n// Read the Graph Name created previously\nbuilder.setName(\"bank\");\nbuilder.addVertexProperty(\"FIRSTNAME\", PropertyType.STRING);\nbuilder.addVertexProperty(\"LASTNAME\", PropertyType.STRING);\nbuilder.addVertexProperty(\"UNIQUEID\", PropertyType.STRING);\nbuilder.addVertexProperty(\"SSN\", PropertyType.STRING);\nbuilder.addVertexProperty(\"PHONENUMBER\", PropertyType.STRING);\nbuilder.addVertexProperty(\"BALANCE\", PropertyType.DOUBLE);\nbuilder.addVertexProperty(\"APR\", PropertyType.DOUBLE);\nbuilder.addVertexProperty(\"LOANAMOUNT\", PropertyType.DOUBLE);\nbuilder.addVertexProperty(\"STREET\", PropertyType.STRING);\nbuilder.addVertexProperty(\"STATE\", PropertyType.STRING);\nbuilder.addVertexProperty(\"ZIPCODE\", PropertyType.STRING);\nbuilder.addVertexProperty(\"CITY\", PropertyType.STRING);\nbuilder.addVertexProperty(\"ACCOUNTNUMBER\", PropertyType.STRING);\nbuilder.addVertexProperty(\"LIMIT\", PropertyType.DOUBLE);\nbuilder.addVertexProperty(\"SECURITYCODE\", PropertyType.STRING);\nbuilder.addVertexProperty(\"EXPIRATIONDATE\", PropertyType.TIMESTAMP);\n\nbuilder.setLoadVertexLabels(true);\nbuilder.setLoadEdgeLabel(true);\nbuilder.setKeystoreAlias(\"alias\");\n",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:56:47+0100",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "oracle.pgx.config.PgRdbmsGraphConfigBuilder@3991c5fa"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613565984350_1568196572",
+      "id": "20200401-170007_2001753867",
+      "dateCreated": "2021-02-17T13:46:24+0100",
+      "dateStarted": "2021-03-22T11:56:47+0100",
+      "dateFinished": "2021-03-22T11:56:47+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14402"
+    },
+    {
+      "text": "%pgx\ngraphConf = builder.build()",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:56:51+0100",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "{\"db_engine\":\"RDBMS\",\"format\":\"pg\",\"error_handling\":{},\"password\":\"*******\",\"name\":\"bank\",\"keystore_alias\":\"alias\",\"vertex_props\":[{\"type\":\"string\",\"dimension\":0,\"name\":\"FIRSTNAME\"},{\"type\":\"string\",\"dimension\":0,\"name\":\"LASTNAME\"},{\"type\":\"string\",\"dimension\":0,\"name\":\"UNIQUEID\"},{\"type\":\"string\",\"dimension\":0,\"name\":\"SSN\"},{\"type\":\"string\",\"dimension\":0,\"name\":\"PHONENUMBER\"},{\"type\":\"double\",\"dimension\":0,\"name\":\"BALANCE\"},{\"type\":\"double\",\"dimension\":0,\"name\":\"APR\"},{\"type\":\"double\",\"dimension\":0,\"name\":\"LOANAMOUNT\"},{\"type\":\"string\",\"dimension\":0,\"name\":\"STREET\"},{\"type\":\"string\",\"dimension\":0,\"name\":\"STATE\"},{\"type\":\"string\",\"dimension\":0,\"name\":\"ZIPCODE\"},{\"type\":\"string\",\"dimension\":0,\"name\":\"CITY\"},{\"type\":\"string\",\"dimension\":0,\"name\":\"ACCOUNTNUMBER\"},{\"type\":\"double\",\"dimension\":0,\"name\":\"LIMIT\"},{\"type\":\"string\",\"dimension\":0,\"name\":\"SECURITYCODE\"},{\"type\":\"timestamp\",\"dimension\":0,\"name\":\"EXPIRATIONDATE\"}],\"jdbc_url\":\"jdbc:oracle:thin:@localhost:1521/orclpdb\",\"vertex_id_type\":\"long\",\"attributes\":{},\"loading\":{\"load_vertex_labels\":true,\"load_edge_label\":true},\"username\":\"bankuser\",\"edge_props\":[]}"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613565984350_2112027220",
+      "id": "20200324-170659_170187105",
+      "dateCreated": "2021-02-17T13:46:24+0100",
+      "dateStarted": "2021-03-22T11:56:51+0100",
+      "dateFinished": "2021-03-22T11:56:51+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14403"
+    },
+    {
+      "text": "%md\n\n## Now read the graph from the database to the PGX engine session.\n",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:56:55+0100",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Now read the graph from the database to the PGX engine session.</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613565984350_1237657394",
+      "id": "20200401-164153_2122361764",
+      "dateCreated": "2021-02-17T13:46:24+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14404",
+      "dateFinished": "2021-03-22T11:56:55+0100",
+      "dateStarted": "2021-03-22T11:56:55+0100"
+    },
+    {
+      "text": "%pgx\ngraph = session.readGraphWithProperties(graphConf)",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:56:58+0100",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "PgxGraph[name=bank,N=15,E=16,created=1616410619101]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613565984350_310993242",
+      "id": "20200324-170750_798366410",
+      "dateCreated": "2021-02-17T13:46:24+0100",
+      "dateStarted": "2021-03-22T11:56:58+0100",
+      "dateFinished": "2021-03-22T11:56:59+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14405"
+    },
+    {
+      "text": "%md\n\n## First step, look for account sharing contact details: phone number, SSN or address, where more than one share the same value.\n",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:57:02+0100",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>First step, look for account sharing contact details: phone number, SSN or address, where more than one share the same value.</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1615929142740_1089220165",
+      "id": "paragraph_1615929142740_1089220165",
+      "dateCreated": "2021-03-16T22:12:22+0100",
+      "dateStarted": "2021-03-22T11:57:02+0100",
+      "dateFinished": "2021-03-22T11:57:02+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14410"
+    },
+    {
+      "text": "%pgx\ngraph.queryPgql(\"\"\"\nSELECT count(*) as ringsize,contact\nMATCH (account:CUST)-[]->(contact)\ngroup by contact having ringsize > 1 order by ringsize desc\n\"\"\")",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:57:04+0100",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "ringsize": "string",
+                      "contact": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "ringsize\tcontact\n3\tPgxVertex[ID=6669874926900192849]\n2\tPgxVertex[ID=516309596472504986]\n2\tPgxVertex[ID=4090088222170435427]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613565984356_1929274219",
+      "id": "paragraph_1606393976194_1878082974",
+      "dateCreated": "2021-02-17T13:46:24+0100",
+      "dateStarted": "2021-03-22T11:57:04+0100",
+      "dateFinished": "2021-03-22T11:57:05+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14411"
+    },
+    {
+      "text": "%md\n\n## This is another way to find the same list using a pattern.\n",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:57:10+0100",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>This is another way to find the same list using a pattern.</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1615929258407_1014016124",
+      "id": "paragraph_1615929258407_1014016124",
+      "dateCreated": "2021-03-16T22:14:18+0100",
+      "dateStarted": "2021-03-22T11:57:10+0100",
+      "dateFinished": "2021-03-22T11:57:10+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14412"
+    },
+    {
+      "text": "%pgx\n\ngraph.queryPgql(\"\"\"\nselect label(contact), count(*) as ringsize\nmatch (accta:CUST)-[e1]->(contact)<-[e2]-(acctb:CUST)\nwhere accta != acctb\ngroup by contact\nhaving count(*) >1\n\"\"\")\n",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:57:12+0100",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "label(contact)": "string",
+                      "ringsize": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "label(contact)\tringsize\nPHONENUMBERS\t2\nSSN\t2\nADDRESS\t6"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1615846213813_1116990188",
+      "id": "paragraph_1615846213813_1116990188",
+      "dateCreated": "2021-03-15T23:10:13+0100",
+      "dateStarted": "2021-03-22T11:57:12+0100",
+      "dateFinished": "2021-03-22T11:57:12+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14413"
+    },
+    {
+      "text": "%pgx\n\nrs=graph.queryPgql(\"\"\"\nselect accta.FIRSTNAME,label(contact),acctb.FIRSTNAME\nmatch (accta:CUST)-[e1]->(contact)<-[e2]-(acctb:CUST)\nwhere accta != acctb\n\"\"\")\nrs",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:57:19+0100",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "editorHide": false,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "accta.FIRSTNAME": "string",
+                      "label(contact)": "string",
+                      "acctb.FIRSTNAME": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "accta.FIRSTNAME\tlabel(contact)\tacctb.FIRSTNAME\nJohn\tPHONENUMBERS\tJane\nJohn\tADDRESS\tMatt\nJohn\tADDRESS\tJane\nMatt\tSSN\tJane\nMatt\tADDRESS\tJohn\nMatt\tADDRESS\tJane\nJane\tPHONENUMBERS\tJohn\nJane\tSSN\tMatt\nJane\tADDRESS\tJohn\nJane\tADDRESS\tMatt"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1615846627104_2091184860",
+      "id": "paragraph_1615846627104_2091184860",
+      "dateCreated": "2021-03-15T23:17:07+0100",
+      "dateStarted": "2021-03-22T11:57:19+0100",
+      "dateFinished": "2021-03-22T11:57:20+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14414"
+    },
+    {
+      "text": "%md\n\n## Find account who share more than one piece of legitimate contact and make groups with them.\n",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:57:27+0100",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Find account who share more than one piece of legitimate contact and make groups with them.</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1615929382184_1823384844",
+      "id": "paragraph_1615929382184_1823384844",
+      "dateCreated": "2021-03-16T22:16:22+0100",
+      "dateStarted": "2021-03-22T11:57:27+0100",
+      "dateFinished": "2021-03-22T11:57:27+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14415"
+    },
+    {
+      "text": "%pgx\n\ngraph.queryPgql(\"\"\"\nselect label(contact), listagg(acct.FIRSTNAME,','), count(*) as size\nfrom match (acct)-[]->(contact)\nwhere exists (\n  SELECT count(*) as ringsize, contact\n  from MATCH (account:CUST)-[]->(contact)\n  group by contact \n  having ringsize > 1 \n  order by ringsize desc\n)\ngroup by label(contact)\n\"\"\")\n",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:57:29+0100",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "label(contact)": "string",
+                      "listagg(acct.FIRSTNAME,',')": "string",
+                      "size": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "label(contact)\tlistagg(acct.FIRSTNAME,',')\tsize\nADDRESS\tJohn,Matt,Jane\t3\nPHONENUMBERS\tJohn,Jane\t2\nSSN\tMatt,Jane\t2"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1615882494462_645199864",
+      "id": "paragraph_1615882494462_645199864",
+      "dateCreated": "2021-03-16T09:14:54+0100",
+      "dateStarted": "2021-03-22T11:57:29+0100",
+      "dateFinished": "2021-03-22T11:57:29+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14416"
+    },
+    {
+      "text": "%md\n\n## Now that we know the suspect accounts, let's determine the financial risk of a possible fraud ring.\n\n",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:57:36+0100",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Now that we know the suspect accounts, let&rsquo;s determine the financial risk of a possible fraud ring.</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1615929450933_2144243539",
+      "id": "paragraph_1615929450933_2144243539",
+      "dateCreated": "2021-03-16T22:17:30+0100",
+      "dateStarted": "2021-03-22T11:57:36+0100",
+      "dateFinished": "2021-03-22T11:57:36+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14417"
+    },
+    {
+      "text": "%pgx\n\ngraph.queryPgql(\"\"\"\nselect label(contact), listagg(acct.FIRSTNAME,','), \n        count(*) as size, round(sum(CASE \n                                     WHEN label(r)='HAS_CREDITCARDS' THEN unsecuredAccount.LIMIT \n                                     WHEN label(r)='HAS_UNSECUREDLOANS' THEN unsecuredAccount.BALANCE \n                                     ELSE 0 \n                                    END)) as FINANCIALRISK\nfrom match (acct)-[]->(contact), \n     match (acct)-[r:HAS_CREDITCARDS|HAS_UNSECUREDLOANS]->(unsecuredAccount)\nwhere exists (\n  SELECT count(*) as ringsize, contact\n  from MATCH (account:CUST)-[]->(contact)\n  group by contact \n  having ringsize > 1 \n  order by ringsize desc\n)\ngroup by label(contact)\n\"\"\")\n",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:57:38+0100",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "editorHide": false,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "label(contact)": "string",
+                      "listagg(acct.FIRSTNAME,',')": "string",
+                      "size": "string",
+                      "FINANCIALRISK": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "label(contact)\tlistagg(acct.FIRSTNAME,',')\tsize\tFINANCIALRISK\nADDRESS\tJohn,Matt,Jane,Jane\t4\t34387.0\nPHONENUMBERS\tJohn,Jane,Jane\t3\t18046.0\nSSN\tMatt,Jane,Jane\t3\t29387.0"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1615928072914_701854286",
+      "id": "paragraph_1615928072914_701854286",
+      "dateCreated": "2021-03-16T21:54:32+0100",
+      "dateStarted": "2021-03-22T11:57:38+0100",
+      "dateFinished": "2021-03-22T11:57:38+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14418"
+    },
+    {
+      "text": "%md\n\n## The results of PGQL queries also can be iterated using code.\n",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:58:13+0100",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>The results of PGQL queries also can be iterated using code.</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1615930197358_1889915872",
+      "id": "paragraph_1615930197358_1889915872",
+      "dateCreated": "2021-03-16T22:29:57+0100",
+      "dateStarted": "2021-03-22T11:58:13+0100",
+      "dateFinished": "2021-03-22T11:58:13+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14419"
+    },
+    {
+      "text": "%pgx\n\nresultSet=graph.queryPgql(\"\"\"\n\nselect  contact, acct\nfrom match (acct)-[]->(contact)\nwhere  exists (\n SELECT count(*) as ringsize,contact\n from MATCH (account:CUST)-[]->(contact)\n group by contact having ringsize > 1 order by ringsize desc)\n\"\"\")\n\nfor (PgxResult result : resultSet) {\n  PgxVertex obj = result.getObject(1);\n  // String label = result.getVertexLabels(1);\n  //long totalRing = result.getLong(2);\n  PgxVertex obj2 = result.getObject(2);\n  println(obj.getId() + \": \" + obj2.getLabels());\n}\n",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:58:16+0100",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "editorHide": false,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "label(contact)": "string",
+                      "contact": "string",
+                      "acct": "string",
+                      "FIRSTNAME": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "4090088222170435427: [CUST]\n4090088222170435427: [CUST]\n516309596472504986: [CUST]\n516309596472504986: [CUST]\n6669874926900192849: [CUST]\n6669874926900192849: [CUST]\n6669874926900192849: [CUST]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1615913577900_1876752520",
+      "id": "paragraph_1615913577900_1876752520",
+      "dateCreated": "2021-03-16T17:52:57+0100",
+      "dateStarted": "2021-03-22T11:58:16+0100",
+      "dateFinished": "2021-03-22T11:58:16+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14420"
+    },
+    {
+      "text": "%md\n\n## Remove the graph from PGX\n\n\n## When finished, remove the graph from the PGX engine memory.",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:58:23+0100",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Remove the graph from PGX</h2>\n<h2>When finished, remove the graph from the PGX engine memory.</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613565984360_1870203384",
+      "id": "20200401-165525_1152067046",
+      "dateCreated": "2021-02-17T13:46:24+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14421",
+      "dateFinished": "2021-03-22T11:58:23+0100",
+      "dateStarted": "2021-03-22T11:58:23+0100"
+    },
+    {
+      "text": "%pgx\ngraph.destroy()",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:58:27+0100",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "(no output)"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613565984360_1571734399",
+      "id": "20200325-064101_387846317",
+      "dateCreated": "2021-02-17T13:46:24+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14422",
+      "dateFinished": "2021-03-22T11:58:27+0100",
+      "dateStarted": "2021-03-22T11:58:27+0100"
+    },
+    {
+      "text": "%pgx\nsession.destroy()",
+      "user": "oracle",
+      "dateUpdated": "2021-03-22T11:58:31+0100",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "(no output)"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613565984361_1667102326",
+      "id": "20200325-071627_476086769",
+      "dateCreated": "2021-02-17T13:46:24+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:14423",
+      "dateFinished": "2021-03-22T11:58:31+0100",
+      "dateStarted": "2021-03-22T11:58:31+0100"
+    },
+    {
+      "text": "%pgx\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-17T13:46:24+0100",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613565984361_295811020",
+      "id": "paragraph_1606395569201_540698150",
+      "dateCreated": "2021-02-17T13:46:24+0100",
+      "status": "READY",
+      "$$hashKey": "object:14424"
+    }
+  ],
+  "name": "Bank Ring Analysis",
+  "id": "2FYFUQ586",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/workshop021/Bank Ring Analysis"
+}
