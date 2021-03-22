@@ -1,0 +1,3 @@
+UniqueId;AccountNumber;Limit;Balance;ExpirationDate;SecurityCode
+"JohnDoe";"1234567890123456";5000;1442.23;"01-22";"123"
+"JaneAppleseed";"1234567890123456";4000;2345.56;"02-22";"456"

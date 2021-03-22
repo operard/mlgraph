@@ -1,0 +1,4 @@
+FirstName;LastName;UniqueId;Street;City;State;ZipCode;SSN;PhoneNumber
+"John";"Doe";"JohnDoe";"123 NW 1st Street";"San Francisco";"California";"94101";"241-23-4567";"555-555-5555"
+"Jane";"Appleseed";"JaneAppleseed";"123 NW 1st Street";"San Francisco";"California";"94101";"241-23-1234";"555-555-5555"
+"Matt";"Smith";"MattSmith";"123 NW 1st Street";"San Francisco";"California";"94101";"241-23-1234";"555-555-1234"
