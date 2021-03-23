@@ -1,4 +1,4 @@
-# Machine Learning Workshop with Oracle Graph![image](https://user-images.githubusercontent.com/3032622/111877257-c2276100-89a2-11eb-9ab1-e78d63f9114f.png)
+# ![image](https://user-images.githubusercontent.com/3032622/111877257-c2276100-89a2-11eb-9ab1-e78d63f9114f.png)
 
 Machine Learning Workshop with Oracle Graph
 
@@ -32,5 +32,23 @@ This workshop walks you through the steps to build a Bank Fraud Detection engine
 ### Step 6: Use PGX Visualizer.
 
 
+## Conclusions
+
+<p>In this workshop, we have seen how you can reuse and convert a 3FN relational data model in order to apply Queries and Machine Learning algorithms using the same Oracle Database.</p>
+<p>This functionality is available in order to apply fast use cases on the relationships between entities.</p>
+<p>You can continue to implement Oracle Graph use cases using the free labs available in the next URLs:</p>
+<ul>
+<li><p>Oracle Property Graph for Real-Time Recommendations Workshop</p></li>
+</ul>
+<p><a href="https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=754">https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=754</a></p>
+<ul>
+<li><p>Analyze and Visualize Property Graphs with Oracle Database Workshop</p></li>
+</ul>
+<p><a href="https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=687">https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=687</a></p>
+<ul>
+<li><p>Getting started with Oracle Property Graph on Docker Workshop</p></li>
+</ul>
+<p><a href="https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=712">https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=712</a></p>
+<p>Other Labs in Machine Learning, AI, Data Management, …etc… are available in the next URL:</p>
 
 
