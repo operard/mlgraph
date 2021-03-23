@@ -13,6 +13,10 @@ This workshop walks you through the steps to build a Bank Fraud Detection engine
 
 ## Workshop Details
 
+To demonstrate the Oracle Graph functionalities, the workshop has been divided in different steps.
+
+![Step By Step](images/stepbystep.png)
+
 
 <p>The manual to execute the workshop step by step is available
 <a href="https://github.com/operard/mlgraph/blob/main/doc/WORKSHOP_MLGraph.pdf">here</a>
