@@ -13,6 +13,11 @@ This workshop walks you through the steps to build a Bank Fraud Detection engine
 
 ## Workshop Details
 
+
+<p>The manual to execute the workshop step by step is available
+<a href="https://github.com/operard/mlgraph/blob/main/doc/WORKSHOP_MLGraph.pdf">here</a>
+</p>
+
 ### Step 1: Convert from Relational Data Model to Property Graph Data Model.
 
 
