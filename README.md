@@ -50,5 +50,5 @@ This workshop walks you through the steps to build a Bank Fraud Detection engine
 </ul>
 <p><a href="https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=712">https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=712</a></p>
 <p>Other Labs in Machine Learning, AI, Data Management, …etc… are available in the next URL:</p>
-
+<p><a href="https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/livelabs-workshop-cards?clear=100&amp;session=101956397438991">https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/livelabs-workshop-cards?clear=100&amp;session=101956397438991</a></p>
 
